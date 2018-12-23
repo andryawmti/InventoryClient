@@ -30,6 +30,12 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
+                            <div class="col-md-12 text-right">
+                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#print-dialog"><em class="fa fa-print"></em></button>
+                            </div>
+                        </div>
+                        <div class="mar_top1"></div>
+                        <div class="row">
                             <div class="col-md-3">
                                 <h5>Distributor : {{ $transaction->distributor_name }}</h5>
                             </div>
@@ -84,6 +90,38 @@
 @endsection
 
 @section('page_js')
+
+    {{--Modal for Print Dialog--}}
+    <div class="modal fade" id="print-dialog" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="{{ route('print.transaction.detail') }}" method="post" id="print-form" class="form-horizontal" role="form">
+                    @csrf
+                    <input type="hidden" name="id" value="{{ $transaction->id }}">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Print Detail Transaction</h4>
+                        <button type="button" class="close pull-right" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <label for="print-type" class="col-md-2">Print As</label>
+                            <div class="col-md-10">
+                                <select name="print_type" id="print-type" class="form-control">
+                                    <option value="spreadsheet">Spreadsheet</option>
+                                    <option value="pdf">PDF</option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Print <em class="icon icon-printer"></em></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <!-- =============== PAGE VENDOR SCRIPTS ===============-->
     <!-- Datatables-->
     <script src="{{asset('angleadmin/vendor/datatables.net/js/jquery.dataTables.js')}}"></script>

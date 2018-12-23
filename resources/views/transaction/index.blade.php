@@ -217,7 +217,8 @@
     <div class="modal fade" id="print-dialog" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form action="#" method="post" id="print-form" class="form-horizontal" role="form">
+                <form action="{{ route('print.transaction') }}" method="post" id="print-form" class="form-horizontal" role="form">
+                    @csrf
                     <div class="modal-header">
                         <h4 class="modal-title">Print Transaction</h4>
                         <button type="button" class="close pull-right" data-dismiss="modal">&times;</button>
@@ -251,9 +252,7 @@
 
                     </div>
                     <div class="modal-footer">
-                        {{--<div class="form-group">--}}
-                            <button type="submit" class="btn btn-primary">Print <em class="icon icon-printer"></em></button>
-                        {{--</div>--}}
+                        <button type="submit" class="btn btn-primary">Print <em class="icon icon-printer"></em></button>
                     </div>
                 </form>
             </div>
@@ -276,22 +275,6 @@
         $(function () {
             $('.data-table-popup').DataTable({
                 lengthMenu: [5]
-            });
-            $('#print-form').submit((e) => {
-                e.preventDefault();
-                let params = {
-                    transaction_category_id: $('#transaction-category-id').val(),
-                    print_type: $('#print-type').val(),
-                    date_start: $('#date-start').val(),
-                    date_end: $('#date-end').val()
-                };
-                axios.post('{{ route('print.transaction') }}', params)
-                   .then((result) => {
-                        console.log(result);
-                   })
-                   .catch((err) => {
-                        console.log(err);
-                   });
             });
         });
     </script>

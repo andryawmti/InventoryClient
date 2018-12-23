@@ -34,6 +34,14 @@
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane active" id="transaction" role="tabpanel">
+                            <div class="row">
+                                <div class="col-md-4">&nbsp;</div>
+                                <div class="col-md-4">&nbsp;</div>
+                                <div class="col-md-4 text-right">
+                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#print-dialog"><em class="fa fa-print"></em></button>
+                                </div>
+                            </div>
+                            <div class="mar_top1"></div>
                             <table class="table table-striped my-4 w-100 data-table">
                                 <thead>
                                 <tr>
@@ -204,6 +212,53 @@
 @endsection
 
 @section('page_js')
+
+    {{--Modal for Print Dialog--}}
+    <div class="modal fade" id="print-dialog" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="{{ route('print.transaction') }}" method="post" id="print-form" class="form-horizontal" role="form">
+                    @csrf
+                    <div class="modal-header">
+                        <h4 class="modal-title">Print Transaction</h4>
+                        <button type="button" class="close pull-right" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <style>
+                            input[type=date] {
+                                display: inline-block;
+                                width: 45%;
+                            }
+                        </style>
+                        <div class="row">
+                            <label class="col-md-2">Date Range</label>
+                            <div class="col-md-10">
+                                <input type="date" id="date-start" class="form-control inline-block" name="date_start">
+                                <label style="width: 8%; text-align: center">To</label>
+                                <input type="date" id="date-end" class="form-control inline-block" name="date_end">
+                                <input type="hidden" id="transaction-category-id" name="transaction_category_id" value="2">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <label for="print-type" class="col-md-2">Print As</label>
+                            <div class="col-md-10">
+                                <select name="print_type" id="print-type" class="form-control">
+                                    <option value="spreadsheet">Spreadsheet</option>
+                                    <option value="pdf">PDF</option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Print <em class="icon icon-printer"></em></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <!-- =============== PAGE VENDOR SCRIPTS ===============-->
     <!-- Datatables-->
     <script src="{{asset('angleadmin/vendor/datatables.net/js/jquery.dataTables.js')}}"></script>

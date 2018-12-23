@@ -63,4 +63,8 @@ Route::prefix('transaction')->group(function () {
  */
 Route::prefix('print')->group(function () {
     Route::post('/transaction', 'PrintController@printTransaction')->name('print.transaction');
+    Route::post('/detail-transaction', 'PrintController@printDetailTransaction')->name('print.transaction.detail');
+    Route::get('/preview', 'PrintController@printPreview')->name('print.preview');
+    Route::get('/transaction/{transaction}/preview', 'PrintController@printPreviewDetailTransaction')
+        ->name('print.preview.detail.transaction');
 });
