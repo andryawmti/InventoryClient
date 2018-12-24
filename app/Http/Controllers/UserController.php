@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\UserGroup;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -40,22 +42,32 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(Request $request)
     {
         request()->validate([
             'user_group_id' => ['required'],
-            'name' => ['required'],
+            'first_name' => ['required'],
+            'last_name' => ['required'],
             'email' => ['required', 'email'],
-            'password' => ['required', 'min:6']
+            'password' => ['required', 'min:6'],
+            'phone' =>  ['required'],
+            'address' => ['required'],
         ]);
 
         $user = new User();
         $user->user_group_id = request('user_group_id');
-        $user->name = request('name');
+        $user->first_name = request('first_name');
+        $user->last_name = request('last_name');
         $user->email = request('email');
         $user->password = Hash::make(request('password'));
+        $user->phone = request('phone');
+        if (request()->hasFile('photo')) {
+            $path = Storage::putFile('public/profile_images', request()->file('photo'));
+            $url = Storage::url($path);
+            $user->photo = $url;
+        }
+        $user->address = request('address');
         $user->save();
-        $user->generateApiToken();
 
         return redirect()->route('user.index');
     }
@@ -92,15 +104,28 @@ class UserController extends Controller
     {
         request()->validate([
             'user_group_id' => ['required'],
-            'name' => ['required'],
+            'first_name' => ['required'],
+            'last_name' => ['required'],
             'email' => ['required', 'email'],
-            'password' => ['required', 'min:6']
+            'password' => ['required', 'min:6'],
+            'phone' =>  ['required'],
+            'address' => ['required'],
         ]);
 
         $user->user_group_id = request('user_group_id');
-        $user->name = request('name');
+        $user->first_name = request('first_name');
+        $user->last_name = request('last_name');
         $user->email = request('email');
-        $user->password = Hash::make(request('password'));
+        if (request('password') != $user->password) {
+            $user->password = Hash::make(request('password'));
+        }
+        $user->phone = request('phone');
+        if (request()->hasFile('photo')) {
+            $path = Storage::putFile('public/profile_images', request()->file('photo'));
+            $url = Storage::url($path);
+            $user->photo = $url;
+        }
+        $user->address = request('address');
         $user->save();
 
         return redirect()->route('user.show', ['id' => $user->id]);

@@ -42,7 +42,7 @@
                         <div class="list-group">
                             <!-- list item-->
                             <div class="list-group-item list-group-item-action">
-                                <a href="#" style="text-decoration: none">
+                                <a href="{{ route('profile') }}" style="text-decoration: none">
                                     <div class="media">
                                         <div class="align-self-start mr-2">
                                             <em class="fa fa-user"></em>

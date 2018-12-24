@@ -22,7 +22,7 @@ class MyHttpResponse
         return redirect()->route($route)->with($return);
     }
 
-    public static function updateResponse(bool $success, $message, $route, $id = 1)
+    public static function updateResponse(bool $success, $message, $route, $id = null)
     {
         $return = [
             'success' => $success,
@@ -30,7 +30,11 @@ class MyHttpResponse
             'message' => $message
         ];
 
-        return redirect()->route($route, ['id' => $id])->with($return);
+        if ($id) {
+            return redirect()->route($route, ['id' => $id])->with($return);
+        } else {
+            return redirect()->route($route)->with($return);
+        }
     }
 
     public static function deleteResponse(bool $success, $message, $route, $id = 1)

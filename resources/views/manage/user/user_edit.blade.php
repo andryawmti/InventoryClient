@@ -23,7 +23,7 @@
             <div class="card card-default" role="tabpanel">
                 <div class="card-header"><h4>Edit User</h4></div>
                 <div class="card-body">
-                    <form class="form-horizontal" method="post" action="{{route('user.update', ['id' => $user->id])}}">
+                    <form class="form-horizontal" method="post" action="{{route('user.update', ['id' => $user->id])}}" enctype="multipart/form-data">
                         @csrf
                         <input type="hidden" name="_method" value="PUT">
                         <fieldset>
@@ -40,9 +40,17 @@
                         </fieldset>
                         <fieldset>
                             <div class="form-group row">
-                                <label class="col-md-2 col-form-label">Name</label>
+                                <label class="col-md-2 col-form-label">First Name</label>
                                 <div class="col-md-10">
-                                    <input class="form-control" name="name" type="text" value="{{ $user->name }}" required>
+                                    <input class="form-control" name="first_name" type="text" value="{{ $user->first_name }}" required>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div class="form-group row">
+                                <label class="col-md-2 col-form-label">Last Name</label>
+                                <div class="col-md-10">
+                                    <input class="form-control" name="last_name" type="text" value="{{ $user->last_name }}" required>
                                 </div>
                             </div>
                         </fieldset>
@@ -64,11 +72,27 @@
                         </fieldset>
                         <fieldset>
                             <div class="form-group row">
-                                <label class="col-md-2 col-form-label">Api Token</label>
+                                <label class="col-md-2 col-form-label">Phone</label>
                                 <div class="col-md-10">
-                                    <input class="form-control" name="api_token" type="text" value="{{ $user->api_token }}" readonly>
+                                    <input class="form-control" name="phone" type="text" value="{{ $user->phone }}" required>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div class="form-group row">
+                                <label class="col-md-2 col-form-label">Address</label>
+                                <div class="col-md-10">
+                                    <textarea class="form-control" rows="5" name="address" >{{ $user->address }}</textarea>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <div class="form-group row">
+                                <label class="col-md-2 col-form-label">Photo</label>
+                                <div class="col-md-10">
+                                    <img width="200" src="{{ $user->photo }}" alt="Profile Photo">
                                     <div class="mar_top1"></div>
-                                    <button type="button" id="regenerate-token" class="btn btn-xs btn-warning">Regenerate</button>
+                                    <input type="file" name="photo" class="form-control">
                                 </div>
                             </div>
                         </fieldset>
@@ -99,16 +123,4 @@
     <script src="{{asset('angleadmin/vendor/datatables.net-keytable/js/dataTables.keyTable.js')}}"></script>
     <script src="{{asset('angleadmin/vendor/datatables.net-responsive/js/dataTables.responsive.js')}}"></script>
     <script src="{{asset('angleadmin/vendor/datatables.net-responsive-bs/js/responsive.bootstrap.js')}}"></script>
-
-    <script>
-        $('#regenerate-token').click(e => {
-            axios.get("{{route('user.generate-token', ['user' => $user->id])}}")
-                .then(res => {
-                    $("input[name=api_token]").val(res.data);
-                })
-                .catch(err => {
-                    console.log(err)
-                });
-        });
-    </script>
 @endsection

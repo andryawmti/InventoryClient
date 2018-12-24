@@ -54,10 +54,10 @@
                                                 <a class="btn btn-xs btn-info" href="{{route('unit.show', ['id' => $u->id])}}"><em class="fa fa-edit"></em></a>
                                             </div>
                                             <div class="col-md-1">
-                                                <form method="post" action="{{route('unit.destroy',['id' => $u->id])}}">
+                                                <form id="delete_{{$u->id}}" method="post" action="{{route('unit.destroy',['id' => $u->id])}}">
                                                     @csrf
                                                     <input type="hidden" name="_method" value="DELETE">
-                                                    <button type="submit" class="btn btn-xs btn-info" customer-id="{{$u->id}}"><em class="fa fa-trash"></em></button>
+                                                    <button type="button" onclick="deleteItem(this.id)" class="btn btn-xs btn-info" id="{{$u->id}}"><em class="fa fa-trash"></em></button>
                                                 </form>
                                             </div>
                                         </div>

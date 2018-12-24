@@ -60,10 +60,10 @@
                                                 <a class="btn btn-xs btn-info" href="{{route('product.show', ['id' => $p->id])}}"><em class="fa fa-edit"></em></a>
                                             </div>
                                             <div class="col-md-1">
-                                                <form method="post" action="{{route('product.destroy',['id' => $p->id])}}">
+                                                <form id="delete_{{$p->id}}" method="post" action="{{route('product.destroy',['id' => $p->id])}}">
                                                     @csrf
                                                     <input type="hidden" name="_method" value="DELETE">
-                                                    <button type="submit" class="btn btn-xs btn-info" product-id="{{$p->id}}"><em class="fa fa-trash"></em></button>
+                                                    <button type="button" onclick="deleteItem(this.id)" class="btn btn-xs btn-info" id="{{$p->id}}"><em class="fa fa-trash"></em></button>
                                                 </form>
                                             </div>
                                         </div>

@@ -37,8 +37,10 @@
                             <thead>
                             <tr>
                                 <th>Id</th>
-                                <th>Name</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
                                 <th>Email</th>
+                                <th>User Group</th>
                                 <th>Created At</th>
                                 <th>Action</th>
                             </tr>
@@ -47,8 +49,10 @@
                             @foreach($users as $u)
                                 <tr class="gradeX">
                                     <td>{{ $u->id }}</td>
-                                    <td>{{ $u->name }}</td>
+                                    <td>{{ $u->first_name }}</td>
+                                    <td>{{ $u->last_name }}</td>
                                     <td>{{ $u->email }}</td>
+                                    <td>{{ $u->userGroup->name }}</td>
                                     <td>{{ date('d-M-Y', strtotime($u->created_at)) }}</td>
                                     <td>
                                         <div class="row">
@@ -56,10 +60,10 @@
                                                 <a class="btn btn-xs btn-info" href="{{route('user.show', ['id' => $u->id])}}"><em class="fa fa-edit"></em></a>
                                             </div>
                                             <div class="col-md-1">
-                                                <form method="post" action="{{route('user.destroy',['id' => $u->id])}}">
+                                                <form id="delete_{{$u->id}}" method="post" action="{{route('user.destroy',['id' => $u->id])}}">
                                                     @csrf
                                                     <input type="hidden" name="_method" value="DELETE">
-                                                    <button type="submit" class="btn btn-xs btn-info" user-id="{{$u->id}}"><em class="fa fa-trash"></em></button>
+                                                    <button type="button" onclick="deleteItem(this.id)" class="btn btn-xs btn-info" id="{{$u->id}}"><em class="fa fa-trash"></em></button>
                                                 </form>
                                             </div>
                                         </div>
@@ -72,7 +76,7 @@
                     <div class="tab-pane" id="add-new" role="tabpanel">
                         <div class="card-header">Add New User</div>
                         <div class="card-body">
-                            <form class="form-horizontal" method="post" action="{{route('user.store')}}">
+                            <form class="form-horizontal" method="post" action="{{route('user.store')}}" enctype="multipart/form-data">
                                 @csrf
                                 <fieldset>
                                     <div class="form-group row">
@@ -88,9 +92,17 @@
                                 </fieldset>
                                 <fieldset>
                                     <div class="form-group row">
-                                        <label class="col-md-2 col-form-label">Name</label>
+                                        <label class="col-md-2 col-form-label">First Name</label>
                                         <div class="col-md-10">
-                                            <input class="form-control" value="{{ old('name') }}" name="name" type="text" required>
+                                            <input class="form-control" value="{{ old('first_name') }}" name="first_name" type="text" required>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <fieldset>
+                                    <div class="form-group row">
+                                        <label class="col-md-2 col-form-label">Last Name</label>
+                                        <div class="col-md-10">
+                                            <input class="form-control" value="{{ old('last_name') }}" name="last_name" type="text" required>
                                         </div>
                                     </div>
                                 </fieldset>
@@ -107,6 +119,30 @@
                                         <label class="col-md-2 col-form-label">Password</label>
                                         <div class="col-md-10">
                                             <input class="form-control" value="{{ old('password') }}" name="password" type="text" required>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <fieldset>
+                                    <div class="form-group row">
+                                        <label class="col-md-2 col-form-label">Phone</label>
+                                        <div class="col-md-10">
+                                            <input class="form-control" value="{{ old('phone') }}" name="phone" type="text" required>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <fieldset>
+                                    <div class="form-group row">
+                                        <label class="col-md-2 col-form-label">Address</label>
+                                        <div class="col-md-10">
+                                            <textarea class="form-control" name="address" rows="5" required>{{ old('address') }}</textarea>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <fieldset>
+                                    <div class="form-group row">
+                                        <label class="col-md-2 col-form-label">Photo</label>
+                                        <div class="col-md-10">
+                                            <input type="file" name="photo" class="form-control">
                                         </div>
                                     </div>
                                 </fieldset>
@@ -139,5 +175,10 @@
     <script src="{{asset('angleadmin/vendor/datatables.net-keytable/js/dataTables.keyTable.js')}}"></script>
     <script src="{{asset('angleadmin/vendor/datatables.net-responsive/js/dataTables.responsive.js')}}"></script>
     <script src="{{asset('angleadmin/vendor/datatables.net-responsive-bs/js/responsive.bootstrap.js')}}"></script>
+    <script src="{{asset('angleadmin/vendor/dropzone/dist/dropzone.js')}}"></script>
+    <script>
+        //let myDropzone = new Dropzone
+    </script>
+
     @include('includes.datatable_script')
 @endsection

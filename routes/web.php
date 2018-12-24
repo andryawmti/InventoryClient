@@ -68,3 +68,12 @@ Route::prefix('print')->group(function () {
     Route::get('/transaction/{transaction}/preview', 'PrintController@printPreviewDetailTransaction')
         ->name('print.preview.detail.transaction');
 });
+
+/**
+ * ProfileController
+ */
+Route::prefix('profile')->group(function () {
+    Route::get('/', 'ProfileController@index')->name('profile');
+    Route::put('/{user}', 'ProfileController@profileUpdate')->name('profile.update');
+    Route::post('/{user}/change-password', 'ProfileController@changePassword')->name('profile.change-password');
+});
