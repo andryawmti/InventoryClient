@@ -55,7 +55,8 @@ Route::prefix('transaction')->group(function () {
     Route::get('/{transaction}', 'TransactionController@show')->name('transaction.show');
     Route::get('/selling/{transaction}', 'TransactionController@showSelling')->name('transaction.show.selling');
     Route::get('/buying/{transaction}', 'TransactionController@showBuying')->name('transaction.show.buying');
-    Route::delete('/{transaction}', 'TransactionController@destroy')->name('transaction.destroy');
+    Route::delete('/selling/{transaction}', 'TransactionController@destroySelling')->name('transaction.destroy.selling');
+    Route::delete('/buying/{transaction}', 'TransactionController@destroyBuying')->name('transaction.destroy.buying');
 });
 
 /**

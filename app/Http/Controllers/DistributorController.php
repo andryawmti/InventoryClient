@@ -40,6 +40,16 @@ class DistributorController extends Controller
      */
     public function store()
     {
+        request()->validate([
+            'first_name' => ['required', 'min:3'],
+            'last_name' => ['required'],
+            'email' => ['required', 'email'],
+            'address' => ['required'],
+            'city' => ['required'],
+            'postal_code' => ['required'],
+            'phone' => ['required'],
+            'company_name' => ['required']
+        ]);
         try {
             $result = Inventory::api()->addDistributor(request()->post());
             return MyHttpResponse::storeResponse($result->success, $result->message, 'distributor.index');
@@ -79,6 +89,16 @@ class DistributorController extends Controller
      */
     public function update($id)
     {
+        request()->validate([
+            'first_name' => ['required', 'min:3'],
+            'last_name' => ['required'],
+            'email' => ['required', 'email'],
+            'address' => ['required'],
+            'city' => ['required'],
+            'postal_code' => ['required'],
+            'phone' => ['required'],
+            'company_name' => ['required']
+        ]);
         try {
             $result = Inventory::api()->updateDistributor($id, request()->post());
             return MyHttpResponse::updateResponse($result->success, $result->message, 'distributor.show', $id);

@@ -1,7 +1,7 @@
 @extends('layouts.appv2')
 
 @section('page_title')
-    Unit
+    Product Category
 @endsection
 
 @section('page_css')

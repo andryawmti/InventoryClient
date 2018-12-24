@@ -69,7 +69,7 @@
                                                     <a class="btn btn-xs btn-info" href="{{route('transaction.show', ['id' => $t->id])}}"><em class="fa fa-eye"></em></a>
                                                 </div>
                                                 <div class="col-md-1">
-                                                    <form id="delete_{{$t->id}}" method="post" action="{{route('transaction.destroy',['id' => $t->id])}}">
+                                                    <form id="delete_{{$t->id}}" method="post" action="{{route('transaction.destroy.selling',['id' => $t->id])}}">
                                                         @csrf
                                                         <input type="hidden" name="_method" value="DELETE">
                                                         <button type="button" onclick="deleteItem(this.id)" class="btn btn-xs btn-info" id="{{$t->id}}"><em class="fa fa-trash"></em></button>

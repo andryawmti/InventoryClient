@@ -72,7 +72,7 @@
                         </table>
                     </div>
                     <div class="tab-pane" id="add-new" role="tabpanel">
-                        <div class="card-header">Add New Customer</div>
+                        <div class="card-header">Add New Distributor</div>
                         <div class="card-body">
                             <form class="form-horizontal" method="post" action="{{route('distributor.store')}}">
                                 @csrf

@@ -1,7 +1,7 @@
 @extends('layouts.appv2')
 
 @section('page_title')
-    Product
+    Product Category
 @endsection
 
 @section('page_css')
@@ -16,15 +16,15 @@
     <!-- Page content-->
     <div class="content-wrapper">
         <div class="content-heading">
-            <div>Manage Product</div>
+            <div>Manage Product Category</div>
         </div>
         <div class="container-fluid">
             <!-- DATATABLE DEMO 1-->
             <div class="card card-default" role="tabpanel">
                 <ul class="nav nav-tabs" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link active show" href="#product" aria-controls="home" role="tab" data-toggle="tab" aria-selected="true">
-                            <em class="fa fa-user fa-fw"></em>Product</a>
+                        <a class="nav-link active show" href="#product-category" aria-controls="home" role="tab" data-toggle="tab" aria-selected="true">
+                            <em class="fa fa-user fa-fw"></em>Product Category</a>
                     </li>
                     <li class="nav-item" role="presentation">
                         <a class="nav-link" href="#add-new" aria-controls="profile" role="tab" data-toggle="tab" aria-selected="false">
@@ -32,7 +32,7 @@
                     </li>
                 </ul>
                 <div class="tab-content">
-                    <div class="tab-pane active" id="product" role="tabpanel">
+                    <div class="tab-pane active" id="product-category" role="tabpanel">
                         <table class="table table-striped my-4 w-100 data-table">
                             <thead>
                             <tr>
@@ -68,7 +68,7 @@
                         </table>
                     </div>
                     <div class="tab-pane" id="add-new" role="tabpanel">
-                        <div class="card-header">Add New Product</div>
+                        <div class="card-header">Add New Product Category</div>
                         <div class="card-body">
                             <form class="form-horizontal" method="post" action="{{route('product-category.store')}}">
                                 @csrf

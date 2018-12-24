@@ -40,6 +40,16 @@ class CustomerController extends Controller
      */
     public function store()
     {
+        request()->validate([
+            'first_name' => ['required', 'min:3'],
+            'last_name' => ['required'],
+            'email' => ['required', 'email'],
+            'address' => ['required'],
+            'city' => ['required'],
+            'postal_code' => ['required'],
+            'phone' => ['required'],
+            'company_name' => ['required']
+        ]);
         try {
             $result = Inventory::api()->addCustomer(request()->post());
             return MyHttpResponse::storeResponse($result->success, $result->message,'customer.index');
@@ -78,6 +88,16 @@ class CustomerController extends Controller
      */
     public function update($id)
     {
+        request()->validate([
+            'first_name' => ['required', 'min:3'],
+            'last_name' => ['required'],
+            'email' => ['required', 'email'],
+            'address' => ['required'],
+            'city' => ['required'],
+            'postal_code' => ['required'],
+            'phone' => ['required'],
+            'company_name' => ['required']
+        ]);
         try {
             $result = Inventory::api()->updateCustomer($id, request()->post());
             return MyHttpResponse::updateResponse($result->success, $result->message, 'customer.show', $result->customer_id);

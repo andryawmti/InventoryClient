@@ -1,7 +1,7 @@
 @extends('layouts.appv2')
 
 @section('page_title')
-    User
+    Distributor
 @endsection
 
 @section('page_css')
@@ -21,7 +21,7 @@
         <div class="container-fluid">
             <!-- DATATABLE DEMO 1-->
             <div class="card card-default" role="tabpanel">
-                <div class="card-header"><h4>Edit Customer</h4></div>
+                <div class="card-header"><h4>Edit Distributor</h4></div>
                 <div class="card-body">
                     <form class="form-horizontal" method="post" action="{{route('distributor.update', ['id' => $distributor->id])}}">
                         @csrf

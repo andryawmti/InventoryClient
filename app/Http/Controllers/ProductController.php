@@ -41,6 +41,14 @@ class ProductController extends Controller
      */
     public function store()
     {
+        request()->validate([
+            'product_category_id' => ['required'],
+            'unit_id' => ['required'],
+            'name' => ['required'],
+            'buy_price' => ['required'],
+            'sell_price' => ['required'],
+            'stock' => ['required']
+        ]);
         try {
             $result = Inventory::api()->addProduct(request()->post());
             return MyHttpResponse::storeResponse($result->success, $result->message, 'product.index');
@@ -86,6 +94,14 @@ class ProductController extends Controller
      */
     public function update($id)
     {
+        request()->validate([
+            'product_category_id' => ['required'],
+            'unit_id' => ['required'],
+            'name' => ['required'],
+            'buy_price' => ['required'],
+            'sell_price' => ['required'],
+            'stock' => ['required']
+        ]);
         try {
             $result = Inventory::api()->updateProduct($id, request()->post());
             return MyHttpResponse::updateResponse($result->success, $result->message, 'product.show', $id);

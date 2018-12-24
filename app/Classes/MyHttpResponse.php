@@ -37,7 +37,7 @@ class MyHttpResponse
         }
     }
 
-    public static function deleteResponse(bool $success, $message, $route, $id = 1)
+    public static function deleteResponse(bool $success, $message, $route)
     {
         $return = [
             'success' => $success,
@@ -45,6 +45,6 @@ class MyHttpResponse
             'message' => $message
         ];
 
-        return redirect()->route($route, ['id' => $id])->with($return);
+        return redirect()->route($route)->with($return);
     }
 }

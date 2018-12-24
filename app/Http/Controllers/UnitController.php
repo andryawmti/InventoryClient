@@ -35,6 +35,9 @@ class UnitController extends Controller
      */
     public function store()
     {
+        request()->validate([
+            'name' => ['required']
+        ]);
         try {
             $result = Inventory::api()->addUnit(request()->post());
             return MyHttpResponse::storeResponse($result->success, $result->message, 'unit.index');
@@ -74,6 +77,9 @@ class UnitController extends Controller
      */
     public function update($id)
     {
+        request()->validate([
+            'name' => ['required']
+        ]);
         try {
             $result = Inventory::api()->updateUnit($id, request()->post());
             return MyHttpResponse::updateResponse($result->success, $result->message, 'unit.show', $id);

@@ -35,6 +35,10 @@ class ProductCategoryController extends Controller
      */
     public function store()
     {
+        request()->validate([
+            'name' => ['required', 'min:3'],
+            'description' => ['min:6']
+        ]);
         try {
             $result = Inventory::api()->addProductCategory(request()->post());
             return MyHttpResponse::storeResponse($result->success, $result->message, 'product-category.index');
@@ -74,6 +78,10 @@ class ProductCategoryController extends Controller
      */
     public function update($id)
     {
+        request()->validate([
+            'name' => ['required', 'min:3'],
+            'description' => ['min:6']
+        ]);
         try {
             $result = Inventory::api()->updateProductCategory($id, request()->post());
             return MyHttpResponse::updateResponse($result->success, $result->message, 'product-category.show', $id);

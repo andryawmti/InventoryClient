@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Classes\Inventory;
+use App\Classes\MyHttpResponse;
 use Illuminate\Http\Request;
 
 class TransactionController extends Controller
@@ -130,8 +131,29 @@ class TransactionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroySelling($id)
     {
-        //
+        try {
+            $result = Inventory::api()->deleteTransaction($id);
+            return MyHttpResponse::deleteResponse($result->success, $result->message, 'transaction.selling.index');
+        } catch (\Exception $e) {
+            return MyHttpResponse::deleteResponse(false, $e->getMessage(), 'transaction.selling.index');
+        }
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroyBuying($id)
+    {
+        try {
+            $result = Inventory::api()->deleteTransaction($id);
+            return MyHttpResponse::deleteResponse($result->success, $result->message, 'transaction.buying.index');
+        } catch (\Exception $e) {
+            return MyHttpResponse::deleteResponse(false, $e->getMessage(), 'transaction.buying.index');
+        }
     }
 }

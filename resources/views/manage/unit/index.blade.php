@@ -1,7 +1,7 @@
 @extends('layouts.appv2')
 
 @section('page_title')
-    User
+    Unit
 @endsection
 
 @section('page_css')
@@ -16,7 +16,7 @@
     <!-- Page content-->
     <div class="content-wrapper">
         <div class="content-heading">
-            <div>Manage Distributor</div>
+            <div>Manage Unit</div>
         </div>
         <div class="container-fluid">
             <!-- DATATABLE DEMO 1-->
@@ -24,7 +24,7 @@
                 <ul class="nav nav-tabs" role="tablist">
                     <li class="nav-item" role="presentation">
                         <a class="nav-link active show" href="#unit" aria-controls="home" role="tab" data-toggle="tab" aria-selected="true">
-                            <em class="fa fa-user fa-fw"></em>Distributors</a>
+                            <em class="fa fa-user fa-fw"></em>Units</a>
                     </li>
                     <li class="nav-item" role="presentation">
                         <a class="nav-link" href="#add-new" aria-controls="profile" role="tab" data-toggle="tab" aria-selected="false">
@@ -68,7 +68,7 @@
                         </table>
                     </div>
                     <div class="tab-pane" id="add-new" role="tabpanel">
-                        <div class="card-header">Add New Customer</div>
+                        <div class="card-header">Add New Unit</div>
                         <div class="card-body">
                             <form class="form-horizontal" method="post" action="{{route('unit.store')}}">
                                 @csrf
