@@ -16,7 +16,14 @@
     <!-- Page content-->
     <div class="content-wrapper">
         <div class="content-heading">
-            <div>Profile Settings</div>
+            <div>
+                Profile Settings
+                <ol class="breadcrumb breadcrumb px-0 pb-0">
+                    <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a>
+                    </li>
+                    <li class="breadcrumb-item active">Profile Settings</li>
+                </ol>
+            </div>
         </div>
         <div class="container-fluid">
             <!-- DATATABLE DEMO 1-->

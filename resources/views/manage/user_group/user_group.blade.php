@@ -16,7 +16,14 @@
     <!-- Page content-->
     <div class="content-wrapper">
         <div class="content-heading">
-            <div>Manage User Group</div>
+            <div>
+                Manage User Group
+                <ol class="breadcrumb breadcrumb px-0 pb-0">
+                    <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a>
+                    </li>
+                    <li class="breadcrumb-item active">User Group</li>
+                </ol>
+            </div>
         </div>
         <div class="container-fluid">
             <!-- DATATABLE DEMO 1-->
@@ -51,13 +58,13 @@
                                     <td>
                                         <div class="row">
                                             <div class="col-md-1">
-                                                <a class="btn btn-xs btn-info" href="{{route('user-group.show', ['id' => $ug->id])}}"><em class="fa fa-edit"></em></a>
+                                                <a class="btn btn-xs btn-info" href="@if($ug->id == 1 || $ug->id == 2) javascript:void(0) @else {{route('user-group.show', ['id' => $ug->id])}}@endif"><em class="fa fa-edit"></em></a>
                                             </div>
                                             <div class="col-md-1">
                                                 <form id="delete_{{$ug->id}}" method="post" action="{{route('user-group.destroy',['id' => $ug->id])}}">
                                                     @csrf
                                                     <input type="hidden" name="_method" value="DELETE">
-                                                    <button type="button" onclick="deleteItem(this.id)" class="btn btn-xs btn-info" id="{{$ug->id}}"><em class="fa fa-trash"></em></button>
+                                                    <button @if($ug->id == 1 || $ug->id == 2) disabled @endif type="button" onclick="deleteItem(this.id)" class="btn btn-xs btn-info" id="{{$ug->id}}"><em class="fa fa-trash"></em></button>
                                                 </form>
                                             </div>
                                         </div>

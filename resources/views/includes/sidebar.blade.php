@@ -85,6 +85,7 @@
                                 <span>Unit</span>
                             </a>
                         </li>
+                        @can('isAdmin')
                         <li>
                             <a href="{{route('user-group.index')}}" title="User Group">
                                 <span>User Group</span>
@@ -95,6 +96,7 @@
                                 <span>User</span>
                             </a>
                         </li>
+                        @endcan
                     </ul>
                 </li>
             </ul>

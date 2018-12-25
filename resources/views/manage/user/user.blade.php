@@ -16,7 +16,14 @@
     <!-- Page content-->
     <div class="content-wrapper">
         <div class="content-heading">
-            <div>Manage User</div>
+            <div>
+                Manage User
+                <ol class="breadcrumb breadcrumb px-0 pb-0">
+                    <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a>
+                    </li>
+                    <li class="breadcrumb-item active">User</li>
+                </ol>
+            </div>
         </div>
         <div class="container-fluid">
             <!-- DATATABLE DEMO 1-->
@@ -47,6 +54,7 @@
                             </thead>
                             <tbody>
                             @foreach($users as $u)
+                                @if($u->id != 1 && $u->id != auth::user()->id)
                                 <tr class="gradeX">
                                     <td>{{ $u->id }}</td>
                                     <td>{{ $u->first_name }}</td>
@@ -69,6 +77,7 @@
                                         </div>
                                     </td>
                                 </tr>
+                                @endif
                             @endforeach
                             </tbody>
                         </table>

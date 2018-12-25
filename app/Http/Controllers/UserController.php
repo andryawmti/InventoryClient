@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Classes\MyHttpResponse;
 use App\User;
 use App\UserGroup;
 use Illuminate\Http\Request;
@@ -12,7 +13,7 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:web');
+        $this->middleware(['auth:web', 'can:isAdmin']);
     }
 
     /**
@@ -54,22 +55,25 @@ class UserController extends Controller
             'address' => ['required'],
         ]);
 
-        $user = new User();
-        $user->user_group_id = request('user_group_id');
-        $user->first_name = request('first_name');
-        $user->last_name = request('last_name');
-        $user->email = request('email');
-        $user->password = Hash::make(request('password'));
-        $user->phone = request('phone');
-        if (request()->hasFile('photo')) {
-            $path = Storage::putFile('public/profile_images', request()->file('photo'));
-            $url = Storage::url($path);
-            $user->photo = $url;
+        try {
+            $user = new User();
+            $user->user_group_id = request('user_group_id');
+            $user->first_name = request('first_name');
+            $user->last_name = request('last_name');
+            $user->email = request('email');
+            $user->password = Hash::make(request('password'));
+            $user->phone = request('phone');
+            if (request()->hasFile('photo')) {
+                $path = Storage::putFile('public/profile_images', request()->file('photo'));
+                $url = Storage::url($path);
+                $user->photo = $url;
+            }
+            $user->address = request('address');
+            $user->save();
+            return MyHttpResponse::storeResponse(true, 'User Successfully Created', 'user.index');
+        } catch (\Exception $e) {
+            return MyHttpResponse::storeResponse(false, $e->getMessage(), 'user.index');
         }
-        $user->address = request('address');
-        $user->save();
-
-        return redirect()->route('user.index');
     }
 
     /**
@@ -112,23 +116,26 @@ class UserController extends Controller
             'address' => ['required'],
         ]);
 
-        $user->user_group_id = request('user_group_id');
-        $user->first_name = request('first_name');
-        $user->last_name = request('last_name');
-        $user->email = request('email');
-        if (request('password') != $user->password) {
-            $user->password = Hash::make(request('password'));
+        try {
+            $user->user_group_id = request('user_group_id');
+            $user->first_name = request('first_name');
+            $user->last_name = request('last_name');
+            $user->email = request('email');
+            if (request('password') != $user->password) {
+                $user->password = Hash::make(request('password'));
+            }
+            $user->phone = request('phone');
+            if (request()->hasFile('photo')) {
+                $path = Storage::putFile('public/profile_images', request()->file('photo'));
+                $url = Storage::url($path);
+                $user->photo = $url;
+            }
+            $user->address = request('address');
+            $user->save();
+            return MyHttpResponse::updateResponse(true, 'User Successfully Updated', 'user.show', $user->id);
+        } catch (\Exception $e) {
+            return MyHttpResponse::updateResponse(false, $e->getMessage(), 'user.show', $user->id);
         }
-        $user->phone = request('phone');
-        if (request()->hasFile('photo')) {
-            $path = Storage::putFile('public/profile_images', request()->file('photo'));
-            $url = Storage::url($path);
-            $user->photo = $url;
-        }
-        $user->address = request('address');
-        $user->save();
-
-        return redirect()->route('user.show', ['id' => $user->id]);
     }
 
     /**
@@ -140,7 +147,11 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        $user->delete();
-        return redirect()->route('user.index');
+        try {
+            $user->delete();
+            return MyHttpResponse::deleteResponse(true, 'User Successfully Deleted', 'user.index');
+        } catch (\Exception $e) {
+            return MyHttpResponse::deleteResponse(false, $e->getMessage(), 'user.index');
+        }
     }
 }
