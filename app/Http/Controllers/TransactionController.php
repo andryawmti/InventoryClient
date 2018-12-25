@@ -156,4 +156,9 @@ class TransactionController extends Controller
             return MyHttpResponse::deleteResponse(false, $e->getMessage(), 'transaction.buying.index');
         }
     }
+
+    public function getStatistic($transaction_category)
+    {
+        return Inventory::api()->getTransactionStatistic($transaction_category);
+    }
 }

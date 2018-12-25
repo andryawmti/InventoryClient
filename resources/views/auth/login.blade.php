@@ -49,7 +49,7 @@
                                 <input type="checkbox" value="" name="remember">
                                 <span class="fa fa-check"></span>Remember Me</label>
                         </div>
-                        <div class="float-right"><a class="text-muted" href="#">Forgot your password?</a>
+                        <div class="float-right">{{--<a class="text-muted" href="#">Forgot your password?</a>--}}
                         </div>
                     </div>
                     <button class="btn btn-block btn-primary mt-3" type="submit">Login</button>
@@ -62,9 +62,9 @@
             <span>&copy;</span>
             <span>{{date('Y')}}</span>
             <span>-</span>
-            <span>Inventory System</span>
-            <br>
-            <span>With Angleadmin Theme</span>
+            <span>Inventory System Client</span>
+            {{--<br>
+            <span>With Angleadmin Theme</span>--}}
         </div>
     </div>
 </div>

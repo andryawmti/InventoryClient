@@ -6,7 +6,7 @@
         <div class="navbar-header">
             <a class="navbar-brand" href="#/">
                 <div class="brand-logo">
-                    <img class="img-fluid" src="{{asset('angleadmin/img/logo.html')}}" alt="App Logo">
+                    <b class="text-white">Inventory System</b>
                 </div>
                 <div class="brand-logo-collapsed">
                     <img class="img-fluid" src="{{asset('angleadmin/img/logo-single.png')}}" alt="App Logo">

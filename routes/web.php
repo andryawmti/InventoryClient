@@ -50,6 +50,7 @@ Route::resource('product-category', 'ProductCategoryController');
  */
 Route::prefix('transaction')->group(function () {
     Route::post('/', 'TransactionController@store')->name('transaction.store');
+    Route::get('/statistic/{transaction_category}', 'TransactionController@getStatistic')->name('transaction.statistic');
     Route::get('/selling', 'TransactionController@allSelling')->name('transaction.selling.index');
     Route::get('/buying', 'TransactionController@allBuying')->name('transaction.buying.index');
     Route::get('/{transaction}', 'TransactionController@show')->name('transaction.show');

@@ -81,6 +81,12 @@ class InventoryApi
         return $this->makeRequest($url, 'POST');
     }
 
+    public function countOfCustomer()
+    {
+        $url = '/customer/count';
+        return $this->makeRequest($url);
+    }
+
     /**
      * Distributor
      */
@@ -112,6 +118,12 @@ class InventoryApi
     {
         $url = '/distributor/'.$id.'/delete';
         return $this->makeRequest($url, 'POST');
+    }
+
+    public function countOfDistributor()
+    {
+        $url = '/distributor/count';
+        return $this->makeRequest($url);
     }
 
     /**
@@ -147,6 +159,12 @@ class InventoryApi
         return $this->makeRequest($url, 'POST');
     }
 
+    public function countOfUnit()
+    {
+        $url = '/unit/count';
+        return $this->makeRequest($url);
+    }
+
     /**
      * Product
      */
@@ -180,6 +198,12 @@ class InventoryApi
         return $this->makeRequest($url, 'POST');
     }
 
+    public function countOfProduct()
+    {
+        $url = '/product/count';
+        return $this->makeRequest($url);
+    }
+
     /**
      * ProductCategory
      */
@@ -211,6 +235,12 @@ class InventoryApi
     {
         $url = '/product-category/'.$id.'/delete';
         return $this->makeRequest($url, 'POST');
+    }
+
+    public function countOfProductCategory()
+    {
+        $url = '/product-category/count';
+        return $this->makeRequest($url);
     }
 
     /**
@@ -250,5 +280,17 @@ class InventoryApi
     {
         $url = '/transaction/'.$id.'/delete';
         return $this->makeRequest($url, 'POST');
+    }
+
+    public function countOfTransaction()
+    {
+        $url = '/transaction/count';
+        return $this->makeRequest($url);
+    }
+
+    public function getTransactionStatistic($transaction_category)
+    {
+        $url = '/transaction/statistic/'.$transaction_category;
+        return $this->makeRequest($url);
     }
 }

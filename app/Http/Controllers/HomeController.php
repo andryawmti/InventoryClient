@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Classes\Inventory;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +24,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('dashboard.home');
+
+        $params = [
+            'count_of_transaction' => Inventory::api()->countOfTransaction(),
+            'count_of_product' => Inventory::api()->countOfProduct(),
+            'count_of_customer' => Inventory::api()->countOfCustomer(),
+            'count_of_distributor' => Inventory::api()->countOfDistributor(),
+        ];
+
+        return view('dashboard.home', $params);
     }
 }
